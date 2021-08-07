@@ -11,8 +11,6 @@ import java.io.IOException;
 public class ServletGame extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("listGames", new DaoGames().findAll());
-        request.getRequestDispatcher("views/game/games.jsp").forward(request, response);
         HttpSession session = request.getSession();
         if(session.getAttribute("session") != null){
             session.setAttribute("listGames", new DaoGames().findAll());

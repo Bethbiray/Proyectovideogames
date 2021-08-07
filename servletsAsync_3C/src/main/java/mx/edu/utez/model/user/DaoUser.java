@@ -1,8 +1,10 @@
 package mx.edu.utez.model.user;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+
+import mx.edu.utez.model.games.DaoGames;
 import mx.edu.utez.service.ConnectionMySQL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -14,32 +16,26 @@ public class DaoUser {
     private CallableStatement cstm;
     private ResultSet rs;
 
-    final private Logger CONSOLE = LoggerFactory.getLogger(DaoUser.class);
+    final Logger CONSOLE= LoggerFactory.getLogger(DaoGames.class);
 
-            public boolean createSession(String email, String password){
-                boolean flag = false;
-                try{
-                    con = ConnectionMySQL.getConnection();
-                    cstm = con.prepareCall( "selec * from user  where  email = ?  and password = ?");
-                    cstm.setString(1, email);
-                    cstm.setString(2, password);
-                    rs = cstm.executeQuery();
+    public boolean createSession(String email, String password){
+        boolean flag = false;
+        try{
+            con = ConnectionMySQL.getConnection();
+            cstm = con.prepareCall("select * from user  where  email = ?  and password = ?");
+            cstm.setString(1, email);
+            cstm.setString(2, password);
+            rs = cstm.executeQuery();
 
-                    if(rs.next()) flag = true;
+            if(rs.next()) flag = true;
+        } catch (SQLException e){
+            CONSOLE.error("Ha ocurrido un error: " + e.getMessage());
 
+        } finally {
+            ConnectionMySQL.closeConnections(con, cstm, rs);
 
+        }
+        return flag;
 
-
-                } catch (SQLException e){
-                    CONSOLE.error("Ha ocurrido un error: " + e.getMessage());
-
-                } finally {
-                    ConnectionMySQL.closeConnections(con, cstm, rs);
-
-                }
-                return flag;
-
-            }
-
-
+    }
 }

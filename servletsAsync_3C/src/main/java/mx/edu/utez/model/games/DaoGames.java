@@ -1,9 +1,9 @@
 package mx.edu.utez.model.games;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import mx.edu.utez.model.category.BeanCategory;
 import mx.edu.utez.service.ConnectionMySQL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;

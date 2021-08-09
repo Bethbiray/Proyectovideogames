@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-08-2021 a las 23:22:21
+-- Tiempo de generación: 10-08-2021 a las 01:31:49
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -55,15 +55,15 @@ DELIMITER ;
 
 CREATE TABLE `category` (
   `idCategory` int(11) NOT NULL,
-  `name` varchar(120) NOT NULL,
-  `status` tinyint(4) NOT NULL
+  `nameCategory` varchar(120) NOT NULL,
+  `statusCategory` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `category`
 --
 
-INSERT INTO `category` (`idCategory`, `name`, `status`) VALUES
+INSERT INTO `category` (`idCategory`, `nameCategory`, `statusCategory`) VALUES
 (1, 'aventura', 1);
 
 -- --------------------------------------------------------

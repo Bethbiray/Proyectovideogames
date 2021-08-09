@@ -5,6 +5,7 @@ import mx.edu.utez.service.ConnectionMySQL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -31,12 +32,12 @@ public class DaoGames {
                 BeanGames beanGames = new BeanGames();
 
                 beanCategory.setIdCategory(rs.getInt("idCategory"));
-                beanCategory.setName(rs.getString("name"));
-                beanCategory.setStatus(rs.getInt("status"));
+                beanCategory.setName(rs.getString("nameCategory"));
+                beanCategory.setStatus(rs.getInt("statusCategory"));
 
                 beanGames.setIdGames(rs.getInt("idGames"));
                 beanGames.setName(rs.getString("name"));
-                byte[] imgBytes = rs.getBytes("imgGames");
+                byte[] imgBytes = rs.getBytes("img_game");
                 String photo = Base64.getEncoder().encodeToString(imgBytes);
                 beanGames.setDatePremiere(rs.getString("date_premiere"));
                 beanGames.setStatus(rs.getInt("status"));
@@ -71,7 +72,7 @@ public class DaoGames {
 
                 games.setIdGames(rs.getInt("idGames"));
                 games.setName(rs.getString("name"));
-                byte[] imgBytes = rs.getBytes("imgGames");
+                byte[] imgBytes = rs.getBytes("img_game");
                 String photo = Base64.getEncoder().encodeToString(imgBytes);
                 games.setDatePremiere(rs.getString("date_premiere"));
                 games.setStatus(rs.getInt("status"));
@@ -86,7 +87,7 @@ public class DaoGames {
         return games;
     }
 
-    public boolean create(BeanGames games) {
+    public boolean create(BeanGames games, InputStream image) {
         boolean flag = false;
         try {
             con = ConnectionMySQL.getConnection();

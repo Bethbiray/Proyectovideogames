@@ -41,8 +41,9 @@ public class ServletGame extends HttpServlet {
             case "create":
                 Part part = request.getPart("image");
                 InputStream image = part.getInputStream();
+                System.out.println(image);
 
-                beanCategory.setIdCategory(Integer.parseInt(request.getParameter("idCategory")));
+                beanCategory.setIdCategory(Integer.parseInt(request.getParameter("category")));
 
                 beanGames.setName(request.getParameter("name"));
                 beanGames.setDatePremiere(request.getParameter("date"));

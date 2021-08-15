@@ -38,7 +38,7 @@ public class DaoGames {
                 beanGames.setIdGames(rs.getInt("idGames"));
                 beanGames.setName(rs.getString("name"));
                 byte[] imgBytes = rs.getBytes("img_game");
-                String photo = Base64.getEncoder().encodeToString(imgBytes);
+                beanGames.setImgGame(Base64.getEncoder().encodeToString(imgBytes));
                 beanGames.setDatePremiere(rs.getString("date_premiere"));
                 beanGames.setStatus(rs.getInt("status"));
                 beanGames.setCategory_idCategory(beanCategory);
@@ -93,11 +93,9 @@ public class DaoGames {
             con = ConnectionMySQL.getConnection();
             cstm = con.prepareCall("{call sp_create(?,?,?,?)}");
             cstm.setString(1, games.getName());
-            cstm.setBytes(2, Base64.getDecoder().decode(games.getImgGame()));
+            cstm.setBlob(2, image);
             cstm.setString(3, games.getDatePremiere());
             cstm.setInt(4, games.getCategory_idCategory().getIdCategory());
-
-
 
 
             flag = cstm.execute();
